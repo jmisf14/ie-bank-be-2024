@@ -1,12 +1,18 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
-from dotenv import load_dotenv
+import dotenv
 import os
+from sqlalchemy import text
+
 
 app = Flask(__name__)
 
-load_dotenv()
+dotenv.load_detonev()
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///local.db'
+
+db = SQLAlchemy(app)
 
 # Select environment based on the ENV environment variable
 if os.getenv('ENV') == 'local':
@@ -20,7 +26,7 @@ elif os.getenv('ENV') == 'ghci':
     app.config.from_object('config.GithubCIConfig')
 else:
     print("Running in production mode")
-    app.config.from_object('config.ProductionConfig')
+    app.config.from_object('Production.LocalConfig')
 
 db = SQLAlchemy(app)
 

@@ -11,7 +11,8 @@ permissions:
   id-token: write
 
 env:
-  BACKEND_WEBAPP_DEV: aguadamillas-be-dev
+  BACKEND_WEBAPP_DEV: jserrano-be-dev
+  BACKEND_WEBAPP_UAT: jserrano-be-uat
 
 jobs:
   build:
@@ -21,9 +22,9 @@ jobs:
       ENV: ghci
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Set up Python 3.11
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@v5
       with:
         python-version: "3.11"
     - name: Upgrade pip
@@ -55,6 +56,7 @@ jobs:
     environment:
       name: 'Development'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
 
     steps:
     - name: Download artifact from build job

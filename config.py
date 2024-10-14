@@ -4,7 +4,7 @@ import os
 load_dotenv()
 
 class Config(object):
-    SECRET_KEY = 'this-really-needs-to-be-changed'
+    DEBUG = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 class LocalConfig(Config):
